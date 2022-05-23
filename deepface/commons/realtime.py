@@ -47,7 +47,7 @@ def analysis(db_path, model_name='VGG-Face', detector_backend='opencv', distance
     model = None
     if len(employees) > 0:
         model = DeepFace.build_model(model_name)
-        print(model_name, " is built")
+        print(model_name, "is built")
 
         # ------------------------
 
@@ -148,10 +148,10 @@ def analysis(db_path, model_name='VGG-Face', detector_backend='opencv', distance
         except:  # to avoid exception if no face detected
             faces = []
 
-        if len(faces) == 0:
-            face_included_frames = 0
-        # else:
-        #     faces = []
+        # if len(faces) == 0:
+        #     face_included_frames = 0
+        # # else:
+        # #     faces = []
 
         detected_faces = []
         # face_index = 0
@@ -369,13 +369,11 @@ def analysis(db_path, model_name='VGG-Face', detector_backend='opencv', distance
                         df = df.sort_values(by=["distance"])
 
                         candidate = df.iloc[0]
-                        employee_name = candidate['employee']
                         best_distance = candidate['distance']
+                        employee_name = candidate['employee']
 
                         if best_distance <= threshold:
-                            display_img = cv2.imread(employee_name)
-
-                            display_img = cv2.resize(display_img, (pivot_img_size, pivot_img_size))
+                            acc = round(best_distance - 1) * 10
 
                             label = employee_name.split("/")[-1].replace(".jpg", "")
                             label = re.sub('[0-9]', '', label)
@@ -391,7 +389,7 @@ def analysis(db_path, model_name='VGG-Face', detector_backend='opencv', distance
                                                   (0, 0, 255), cv2.FILLED)
                                     # cv2.addWeighted(overlay, opacity, freeze_img, 1 - opacity, 0, freeze_img)
 
-                                    cv2.putText(freeze_img, f"{label} {round(best_distance * 10)}%", (x + w, y + 10),
+                                    cv2.putText(freeze_img, f"{label} {acc}%", (x + w, y + 10),
                                                 cv2.FONT_HERSHEY_SIMPLEX,
                                                 0.5, text_color, 2)
 
@@ -411,7 +409,7 @@ def analysis(db_path, model_name='VGG-Face', detector_backend='opencv', distance
                                                   (0, 0, 255), cv2.FILLED)
                                     # cv2.addWeighted(overlay, opacity, freeze_img, 1 - opacity, 0, freeze_img)
 
-                                    cv2.putText(freeze_img, f"{label} {round(best_distance * 10)}%",
+                                    cv2.putText(freeze_img, f"{label} {acc}%",
                                                 (x - pivot_img_size, y + h - 10),
                                                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, text_color, 2)
 
@@ -433,7 +431,7 @@ def analysis(db_path, model_name='VGG-Face', detector_backend='opencv', distance
                                                   (0, 0, 255), cv2.FILLED)
                                     # cv2.addWeighted(overlay, opacity, freeze_img, 1 - opacity, 0, freeze_img)
 
-                                    cv2.putText(freeze_img, f"{label} {round(best_distance * 10)}%",
+                                    cv2.putText(freeze_img, f"{label} {acc}%",
                                                 (x - pivot_img_size, y + 10),
                                                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, text_color, 2)
 
@@ -456,7 +454,7 @@ def analysis(db_path, model_name='VGG-Face', detector_backend='opencv', distance
                                                   (x + w + pivot_img_size, y + h), (0, 0, 255), cv2.FILLED)
                                     # cv2.addWeighted(overlay, opacity, freeze_img, 1 - opacity, 0, freeze_img)
 
-                                    cv2.putText(freeze_img, f"{label} {round(best_distance * 10)}%",
+                                    cv2.putText(freeze_img, f"{label} {acc}%",
                                                 (x + w, y + h - 10),
                                                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, text_color, 2)
 

@@ -41,30 +41,30 @@ def collect():
         frame = cv.resize(frame, (0, 0), None, 0.5, 0.5)
 
         # store image
-        if count < 3:
-            if count == 0:
-                print("Facial image collection will start in 3 sec. Kindly face the camera")
-            _save_face_portion(frame, username, count)
-        elif 3 < count < 7:
-            if count == 4:
-                print('slightly turn your face left')
-            _save_face_portion(frame, username, count)
-        elif 7 < count < 11:
-            if count == 8:
-                print('slightly turn your face right')
-            _save_face_portion(frame, username, count)
-        elif 11 < count < 15:
-            if count == 12:
-                print('slightly turn your face up')
-            _save_face_portion(frame, username, count)
-        else:
-            if count == 16:
-                print('slightly turn your face down')
-            _save_face_portion(frame, username, count)
+        # if count < 3:
+        #     if count == 0:
+        print("Facial image collection will start in 3 sec. Kindly face the camera")
+        _save_face_portion(frame, username, count)
+        # elif 3 < count < 7:
+        #     if count == 4:
+        #         print('slightly turn your face left')
+        #     _save_face_portion(frame, username, count)
+        # elif 7 < count < 11:
+        #     if count == 8:
+        #         print('slightly turn your face right')
+        #     _save_face_portion(frame, username, count)
+        # elif 11 < count < 15:
+        #     if count == 12:
+        #         print('slightly turn your face up')
+        #     _save_face_portion(frame, username, count)
+        # else:
+        #     if count == 16:
+        #         print('slightly turn your face down')
+        #     _save_face_portion(frame, username, count)
 
         cv.imshow(f"Collecting {username}'s face", frame)
 
-        if count == 18:
+        if count == 5:
             break
         count += 1
         if cv.waitKey(1) & 0xFF == ord('q'):
