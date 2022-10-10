@@ -1,10 +1,9 @@
 import time
-
 from deepface import DeepFace
 from collect_images import collect
 
 
-def again():
+def run():
     response = input("Enter '1' for facial recognition or '2' to collect image sample: ")
     if response == str(1):
         DeepFace.stream('database', model_name='Facenet', detector_backend='dlib',
@@ -14,7 +13,8 @@ def again():
     else:
         time.sleep(1)
         print("wrong input")
-        again()
+        run()
 
 
-again()
+if __name__ == '__main__':
+    run()
